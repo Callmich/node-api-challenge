@@ -22,4 +22,16 @@ router.get('/:id', (req, res)=>{
     })
 })
 
+router.post("/", (req, res) => {
+    projectDb.insert(req.body)
+    .then((newProject)=>{
+        res.status(200).json(newProject)
+    })
+    .catch((error)=>{
+        console.log("issue with Post Project",error)
+        res.status(500).json({error: "There was an issue trying to create the project"})
+    })
+})
+
+
 module.exports = router;
