@@ -30,6 +30,17 @@ router.post("/", validateProjectId, (req, res)=>{
     })
 })
 
+router.put('/:id', (req, res)=>{
+    actionDb.update(req.params.id, req.body)
+    .then((upAction)=>{
+        res.status(200).json(upAction)
+    })
+    .catch((error)=>{
+        console.log("Error updating action", error)
+        res.status(500).json({error: "Error updating action to server"})
+    })
+})
+
 
 
 
