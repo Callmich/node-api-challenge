@@ -22,6 +22,17 @@ router.get('/:id', (req, res)=>{
     })
 })
 
+router.get('/:id/actions', (req, res)=>{
+    projectDb.getProjectActions(req.params.id)
+    .then((actions)=>{
+        res.status(200).json(actions)
+    })
+    .catch((error)=>{
+        console.log("Error geting actions for project",error)
+        res.status(500).json({error: "The actions could not be retrived from the server"})
+    })
+})
+
 router.post("/", (req, res) => {
     projectDb.insert(req.body)
     .then((newProject)=>{
