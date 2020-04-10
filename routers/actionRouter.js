@@ -41,6 +41,17 @@ router.put('/:id', (req, res)=>{
     })
 })
 
+router.delete('/:id', (req, res)=>{
+    actionDb.remove(req.params.id)
+    .then((delAction)=>{
+        res.status(200).json(delAction)
+    })
+    .catch((error)=>{
+        console.log("error deleting action", error)
+        res.status(500).json({error: "Error deleteing action in server"})
+    })
+})
+
 
 
 
