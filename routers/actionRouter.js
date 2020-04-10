@@ -8,6 +8,17 @@ const router = express.Router();
 
 //crud actions for /api/action
 
+router.get("/:id", (req, res)=>{
+    actionDb.get(req.params.id)
+    .then((action)=>{
+        res.status(200).json(action)
+    })
+    .catch((error)=>{
+        console.log("error getting specific action", error)
+        res.status(500).json({error: "error retrieving action from server"})
+    })
+})
+
 router.post("/", validateProjectId, (req, res)=>{
     actionDb.insert(req.body)
     .then((newAction)=>{
@@ -15,6 +26,7 @@ router.post("/", validateProjectId, (req, res)=>{
     })
     .catch((error)=>{
         console.log("error when adding an action", error)
+        res.status(500).json({error: "Error saving action to server"})
     })
 })
 
