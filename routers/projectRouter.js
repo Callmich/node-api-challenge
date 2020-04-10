@@ -44,5 +44,16 @@ router.put('/:id', (req, res)=>{
     })
 })
 
+router.delete('/:id', (req, res)=>{
+    projectDb.remove(req.params.id)
+    .then((delProject)=>{
+        res.status(200).json(delProject)
+    })
+    .catch((error)=>{
+        console.log("error when deleteing a project",error)
+        res.status(500).json({error: "The prjoect could not be deleted"})
+    })
+})
+
 
 module.exports = router;
